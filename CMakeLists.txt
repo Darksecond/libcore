@@ -12,6 +12,23 @@ if (APPLE)
 	set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
 endif ()
 
+# Platform dependent files
+# Files for all UNIX platforms (things like pthread fit here)
+if (UNIX)
+	set (PLATFORM_FILES ${PLATFORM_FILES}
+		src/core/threading/unix/condition_variable.cc
+		src/core/threading/unix/mutex.cc
+		src/core/threading/unix/thread.cc
+		)
+endif ()
+
+# Apple only code, such as mach timers
+if (APPLE)
+	set (PLATFORM_FILES ${PLATFORM_FILES}
+		src/core/time/apple/hf_timer.cc
+		)
+endif ()
+
 add_library (core 
 	include/core/hash.h
 	include/core/memory.h
@@ -50,10 +67,7 @@ add_library (core
 	src/core/memory/heap_area.cc
 	src/core/memory/linear_allocator.cc
 	src/core/memory/system_allocator.cc
-	src/core/threading/condition_variable.cc
-	src/core/threading/mutex.cc
-	src/core/threading/thread.cc
-	src/core/time/hf_timer.cc
+	${PLATFORM_FILES}
 	)
 
 add_executable (core_test test/core/core_test.cc)

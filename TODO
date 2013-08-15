@@ -1,18 +1,10 @@
 TODO
 ====
 
-* make time/hf_timer.cc platform dependent (os-x only)
-* make threading/thread.cc platform dependent (unix)
-* make threading/mutex.cc platform dependent (unix)
-* make threading/conditional_variable.cc platform dependent (unix)
 * async. file operations
 * SOURCE_GROUP in CMakeLists.txt
 * most stuff in types.h to type_info.h
-* never include stddef/stdint.h, only core/types.h
 * get rid of memory.h (it does nothing)
-* move and rename hash.h into it's own folder
-* hf_timer.h rename start to reset
-* hf_timer.h rename get_* to delta-something
 * allow cleanup in thread_local_storage
 * add math/vectory things (vector3,vector2,quaternion,matrix,etc)
 * add tasking (thread stuff)
@@ -22,3 +14,6 @@ TODO
 * file logger
 * new_delete.h construct/destruct templates
 * profiler
+* add README
+* doc/coding_standard.md
+* SIMD

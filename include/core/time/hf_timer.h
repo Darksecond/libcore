@@ -13,9 +13,9 @@ namespace core
     {
     public:
         /**
-         * (Re)Start the timer.
+         * (re)set the timer.
          */
-        void start();
+        void reset();
     
         /**
          * get the current delta in nanoseconds.

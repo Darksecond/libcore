@@ -1,4 +1,5 @@
 #pragma once
+
 namespace core
 {
     template <typename T, size_t N>

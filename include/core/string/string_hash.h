@@ -1,7 +1,7 @@
 #pragma once
 
 #include <core/types.h>
-#include <core/hash.h>
+#include <core/hashing/fnv1a.h>
 
 namespace core
 {
@@ -10,7 +10,7 @@ namespace core
     public:
         typedef uint64_t Type;
         
-        constexpr string_hash(const char* str) : hash(hash::hash_fnv1a(str))
+        constexpr string_hash(const char* str) : hash(hash_fnv1a(str))
 #ifdef DEBUG
         , original_string(str)
 #endif

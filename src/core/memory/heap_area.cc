@@ -1,6 +1,6 @@
 #include <core/memory/heap_area.h>
 
-#include <stdlib.h>
+#include <cstdlib>
 
 core::heap_area::heap_area(size_t s) : _start(nullptr), _size(0)
 {
