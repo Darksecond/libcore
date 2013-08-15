@@ -22,3 +22,5 @@ TODO
 * tests
 * samples
 * compiler.h
+* rename root folder from core to libcore
+* replace <fstream> (c++ filesystem handling) with C variety
