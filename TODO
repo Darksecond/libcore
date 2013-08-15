@@ -21,3 +21,4 @@ TODO
 * CORE_NEW_ALIGNED, etc
 * file logger
 * new_delete.h construct/destruct templates
+* profiler
