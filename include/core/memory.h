@@ -6,10 +6,10 @@
 
 //EXAMPLES:
 //STL::FalbackAllocator& someArena = fallbackAllocator();
-//int* a = P_NEW(someArena, int, 3);
-//P_DELETE(someArena, a);
-//int* b = P_NEW_ARRAY(someArena, int[3]);
-//P_DELETE_ARRAY(someArena, b);
+//int* a = CORE_NEW(someArena, int, 3);
+//CORE_DELETE(someArena, a);
+//int* b = CORE_NEW_ARRAY(someArena, int[3]);
+//CORE_DELETE_ARRAY(someArena, b);
 /*
  struct alignas(128) bigalign
  {
@@ -21,5 +21,5 @@ namespace core
 {
     //TODO add 'arena' class-range after all
     //TODO write more allocators (pool, linear, stack)
-    //TODO write a macro to re-size a size to include the P_NEW_ARRAY overhead
+    //TODO write a macro to re-size a size to include the CORE_NEW_ARRAY overhead
 };

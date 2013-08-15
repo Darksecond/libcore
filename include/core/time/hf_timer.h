@@ -33,7 +33,7 @@ namespace core
         double get_milliseconds() const;
         
     private:
-#ifdef P_PLATFORM_APPLE
+#ifdef CORE_PLATFORM_APPLE
         uint64_t _start;
 #endif
     };

@@ -20,7 +20,7 @@ core::file* core::fs_archive::open(const char* path, int mode)
     struct stat buffer;
     bool exists = stat(full_path.c_str(), &buffer) == 0;
     if(exists)
-        return P_NEW(*_arena, fs_file, full_path.c_str(), mode, this);
+        return CORE_NEW(*_arena, fs_file, full_path.c_str(), mode, this);
     else
         return nullptr;
 }
@@ -29,5 +29,5 @@ void core::fs_archive::close(file* file)
 {
     assert(file);
     
-    P_DELETE(*_arena, file);
+    CORE_DELETE(*_arena, file);
 }

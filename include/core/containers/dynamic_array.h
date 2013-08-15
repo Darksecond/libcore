@@ -63,7 +63,7 @@ namespace core
         {
             assert(_start == nullptr); //dynamic_array has not been free-ed yet.
             
-            _start = static_cast<T*>(_arena->allocate(sizeof(T)*new_capacity, alignof(T), 0, P_SOURCEINFO));
+            _start = static_cast<T*>(_arena->allocate(sizeof(T)*new_capacity, alignof(T), 0, CORE_SOURCEINFO));
             _end = _start + new_capacity;
             _used_end = _start;
         }
@@ -93,7 +93,7 @@ namespace core
             clear();
             
             if(_start)
-                _arena->free(_start, P_SOURCEINFO);
+                _arena->free(_start, CORE_SOURCEINFO);
             
             _start = nullptr;
             _end = nullptr;

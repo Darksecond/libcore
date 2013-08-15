@@ -6,15 +6,15 @@
 #include <type_traits>
 #include <new>
 
-#define P_NEW(arena, type, ...) (new ((arena).allocate(sizeof(type), alignof(type), 0, P_SOURCEINFO)) type(__VA_ARGS__))
+#define CORE_NEW(arena, type, ...) (new ((arena).allocate(sizeof(type), alignof(type), 0, CORE_SOURCEINFO)) type(__VA_ARGS__))
 
-#define P_DELETE(arena, object) core::memory_internals::delete_mem(arena, object, P_SOURCEINFO)
+#define CORE_DELETE(arena, object) core::memory_internals::delete_mem(arena, object, CORE_SOURCEINFO)
 
-#define P_NEW_ARRAY(arena, type) core::memory_internals::new_array_mem<core::type_and_count<type>::Type>(arena, core::type_and_count<type>::Count, P_SOURCEINFO, core::bool_to_type<std::is_pod<core::type_and_count<type>::Type>::value>())
+#define CORE_NEW_ARRAY(arena, type) core::memory_internals::new_array_mem<core::type_and_count<type>::Type>(arena, core::type_and_count<type>::Count, CORE_SOURCEINFO, core::bool_to_type<std::is_pod<core::type_and_count<type>::Type>::value>())
 
-#define P_NEW_ARRAY_WITH_COUNT(arena, type, count) core::memory_internals::new_array_mem<type>(arena, count, P_SOURCEINFO, core::bool_to_type<std::is_pod<core::type_and_count<type>::Type>::value>())
+#define CORE_NEW_ARRAY_WITH_COUNT(arena, type, count) core::memory_internals::new_array_mem<type>(arena, count, CORE_SOURCEINFO, core::bool_to_type<std::is_pod<core::type_and_count<type>::Type>::value>())
 
-#define P_DELETE_ARRAY(arena, ptr) core::memory_internals::delete_array_mem(arena, ptr, P_SOURCEINFO);
+#define CORE_DELETE_ARRAY(arena, ptr) core::memory_internals::delete_array_mem(arena, ptr, CORE_SOURCEINFO);
 
 namespace core
 {
