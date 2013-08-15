@@ -14,7 +14,6 @@ TODO
 * file logger
 * new_delete.h construct/destruct templates
 * profiler
-* add README
 * doc/coding_standard.md
 * SIMD
 * {fixed,dynamic}_{queue,stack,hashmap}
