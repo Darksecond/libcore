@@ -22,4 +22,3 @@ TODO
 * tests
 * samples
 * compiler.h
-* replace <fstream> (c++ filesystem handling) with C variety

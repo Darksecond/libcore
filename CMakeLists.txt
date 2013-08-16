@@ -30,7 +30,7 @@ if (APPLE)
 endif ()
 
 add_library (core 
-	include/core/hash.h
+	include/core/hashing/fnv1a.h
 	include/core/memory.h
 	include/core/platform.h
 	include/core/types.h
