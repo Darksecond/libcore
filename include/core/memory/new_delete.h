@@ -20,16 +20,6 @@ namespace core
 {
     namespace memory_internals
     {
-        //TODO move this out to another file
-        inline void* align_forward(void* p, size_t align)
-        {
-            uintptr_t pi = uintptr_t(p);
-            const size_t mod = pi % align;
-            if (mod)
-                pi += (align - mod);
-            return (void*)pi;
-        }
-        
         typedef bool_to_type<false> NonPODType;
         typedef bool_to_type<true> PODType;
         

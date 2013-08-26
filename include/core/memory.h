@@ -16,10 +16,3 @@
  uint64_t i[2];
  };
  */
-
-namespace core
-{
-    //TODO add 'arena' class-range after all
-    //TODO write more allocators (pool, linear, stack)
-    //TODO write a macro to re-size a size to include the CORE_NEW_ARRAY overhead
-};
