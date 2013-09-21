@@ -3,6 +3,15 @@ libcore
 
 Libcore is a STL replacement/supplement library. It is designed to be used in game engines and is designed around 'data oriented design'.
 
+Building
+========
+
+1. mkdir build
+2. cd build
+3. cmake ..
+4. make
+5. make test
+
 Contributing
 ------------
 
