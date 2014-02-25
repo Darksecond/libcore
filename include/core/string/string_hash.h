@@ -11,16 +11,10 @@ namespace core
         typedef uint64_t Type;
         
         constexpr string_hash(const char* str) : hash(hash_fnv1a(str))
-#ifdef DEBUG
-        , original_string(str)
-#endif
         {
         }
         
         explicit constexpr string_hash(Type h) : hash(h)
-#ifdef DEBUG
-        , original_string(nullptr)
-#endif
         {
         }
         
@@ -29,17 +23,7 @@ namespace core
             return hash;
         }
         
-#ifdef DEBUG
-        constexpr inline const char* string()
-        {
-            return original_string;
-        }
-#endif
-        
     private:
         const Type hash;
-#if DEBUG
-        const char* const original_string;
-#endif
     };
 };
