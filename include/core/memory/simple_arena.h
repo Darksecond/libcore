@@ -6,6 +6,7 @@
 
 namespace core
 {
+    //TODO Rename this
     template <typename Allocator>
     class simple_arena : public arena
     {

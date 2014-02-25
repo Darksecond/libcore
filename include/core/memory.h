@@ -3,9 +3,10 @@
 #include <core/memory/new_delete.h>
 #include <core/memory/arena.h>
 #include <core/memory/heap_area.h>
+#include <core/memory/linear_allocator.h>
 
 //EXAMPLES:
-//STL::FalbackAllocator& someArena = fallbackAllocator();
+//STL::FallbackAllocator& someArena = fallbackAllocator();
 //int* a = CORE_NEW(someArena, int, 3);
 //CORE_DELETE(someArena, a);
 //int* b = CORE_NEW_ARRAY(someArena, int[3]);

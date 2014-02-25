@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include <core/hashing/fnv1a.h>
+#include <core/memory.h>
 
 template <uint64_t NUM>
 struct test_compile_time_const {
@@ -15,6 +16,10 @@ void test_fnv1a_hash() {
 }
 
 int main() {
+	core::heap_area area(64*1024); //64KiB
+	core::some_arena<core::linear_allocator> arena(area);
+	int* a = CORE_NEW(arena, int, 3);
+	CORE_DELETE(arena, a);
 	test_fnv1a_hash();
 	return 0;
 }
