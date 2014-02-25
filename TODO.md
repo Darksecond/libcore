@@ -31,6 +31,7 @@ TODO
 * CORE_NEW_ALIGNED, etc
 * new_delete.h construct/destruct templates
 * write a macro to re-size a size to include the CORE_NEW_ARRAY overhead
+* stack_area, using alloca
 
 * {fixed,dynamic}_{queue,stack,hashmap}
 * linked list
