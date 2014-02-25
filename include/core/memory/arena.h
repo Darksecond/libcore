@@ -15,6 +15,13 @@ namespace core
 
     //TODO Rename
     //TODO Move to it's own file
+    /**
+     * This arena only works for allocators that have a constructor
+     * in the form of allocator(void* start, void* end).
+     *
+     * That's why it won't work for the fallback allocator,
+     * at least not in it's current form.
+     */
     template <typename Allocator>
     class some_arena
     {
