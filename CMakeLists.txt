@@ -48,6 +48,7 @@ add_library (core
 	include/core/logging/log.h
 	include/core/memory/arena.h
 	include/core/memory/heap_area.h
+	include/core/memory/stack_area.h
 	include/core/memory/linear_allocator.h
 	include/core/memory/new_delete.h
 	include/core/memory/simple_arena.h

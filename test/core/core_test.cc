@@ -3,17 +3,7 @@
 
 #include <core/hashing/fnv1a.h>
 #include <core/memory.h>
-
-//TODO Move to it's own file
-template <int Size>
-class stack_area
-{
-	uint8_t buffer[Size];
-public:
-        inline void* start() const { return (void*)buffer; }
-        inline size_t size() const { return Size; }
-        inline void* end() const { return (uint8_t*)buffer + Size; }
-};
+#include <core/memory/stack_area.h>
 
 template <uint64_t NUM>
 struct test_compile_time_const {
@@ -28,9 +18,14 @@ void test_fnv1a_hash() {
 
 int main() {
 	core::heap_area area(64*1024); //64KiB
-	stack_area<64*1024> sa;
+	int x;
+	core::stack_area<64*1024> sa;
+	int y;
 	core::some_arena<core::linear_allocator> arena(sa);
 	int* a = CORE_NEW(arena, int, 3);
+	std::cout << &x << std::endl;
+	std::cout << sa.start() << std::endl;
+	std::cout << &y << std::endl;
 	CORE_DELETE(arena, a);
 	test_fnv1a_hash();
 	return 0;
