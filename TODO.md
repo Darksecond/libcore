@@ -25,13 +25,14 @@ TODO
 * add math/vectory things (vector3,vector2,quaternion,matrix,etc)
 * SIMD
 
-* get rid of memory.h (it does nothing, expect 'bundle' headers)
+* get rid of memory.h (it does nothing, except 'bundle' headers)
 * more allocators
 * 'fancy' arena
 * CORE_NEW_ALIGNED, etc
 * new_delete.h construct/destruct templates
 * write a macro to re-size a size to include the CORE_NEW_ARRAY overhead
-* stack_area, using alloca
+* stack_area, (probably templated)
+* virtual_memory namespace with (reserve, release), (commit, decommit), (alloc and free).
 
 * {fixed,dynamic}_{queue,stack,hashmap}
 * linked list
