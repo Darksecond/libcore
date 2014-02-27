@@ -5,6 +5,8 @@
 #include <core/memory.h>
 #include <core/memory/stack_area.h>
 
+#include <core/containers/fixed_stack.h>
+
 class Test
 {
 	int t;
@@ -31,6 +33,30 @@ void test_fnv1a_hash() {
 	assert(core::hash_fnv1a("test") == 18007334074686647077ULL);
 	//test for real compile time hash
 	test_compile_time_const<core::hash_fnv1a("test")> hash;
+}
+
+void test_fixed_stack()
+{
+	core::fixed_stack<int, 100> stack;
+
+    assert(stack.capacity() == 100);
+    assert(stack.size() == 0);
+    stack.push(1);
+    stack.push(2);
+    stack.push(3);
+    assert(stack.size() == 3);
+    assert(stack.top() == 3);
+    stack.pop();
+    assert(stack.size() == 2);
+    assert(stack.top() == 2);
+    stack.clear();
+    assert(stack.size() == 0);
+    stack.push(1);
+    stack.push(2);
+    int count = 0;
+    for(core::fixed_stack<int, 100>::iterator it = stack.begin(); it != stack.end(); ++it)
+        ++count;
+    assert(count == 2);
 }
 
 //TODO Make tests for memory stuff
@@ -61,5 +87,6 @@ int main() {
 	CORE_DELETE(arena, d);
 
 	test_fnv1a_hash();
+	test_fixed_stack();
 	return 0;
 }

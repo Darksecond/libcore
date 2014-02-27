@@ -20,6 +20,7 @@ TODO
 
 * code comments
 * tests
+* test suite
 * samples
 
 * sounds more like a libmath thing
