@@ -22,16 +22,21 @@ TODO
 * tests
 * samples
 
-* add math/vectory things (vector3,vector2,quaternion,matrix,etc)
-* SIMD
+* sounds more like a libmath thing
+** add math/vectory things (vector3,vector2,quaternion,matrix,etc)
+** SIMD
 
-* get rid of memory.h (it does nothing, except 'bundle' headers)
-* more allocators
-* 'fancy' arena
+* clean up memory.h, add examples, decide what to include
+* 'fancy' arena -> memory_arena
+** with guards and other features
 * CORE_NEW_ALIGNED, etc
 * new_delete.h construct/destruct templates
 * write a macro to re-size a size to include the CORE_NEW_ARRAY overhead
 * virtual_memory namespace with (reserve, release), (commit, decommit), (alloc and free).
+* system_allocator -> alignment
+* stack allocator -> http://molecularmusings.wordpress.com/2012/08/27/memory-allocation-strategies-a-stack-like-lifo-allocator/
+* pool allocator -> http://molecularmusings.wordpress.com/2012/09/17/memory-allocation-strategies-a-pool-allocator/
+* more allocators
 
 * {fixed,dynamic}_{queue,stack,hashmap}
 * linked list

@@ -13,6 +13,7 @@ void* core::linear_allocator::allocate(const size_t size, const size_t alignment
     _current += size;
     if(_current >= _end)
     {
+	// Out of memory
         return nullptr;
     }
     

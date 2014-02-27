@@ -13,22 +13,22 @@ namespace core
         virtual void free(void* object, const source_info& info) = 0;
     };
 
-    //TODO Rename
     //TODO Move to it's own file
     /**
      * This arena only works for allocators that have a constructor
      * in the form of allocator(void* start, void* end).
+     * That's why it won't work for the system allocator.
      *
-     * That's why it won't work for the fallback allocator,
-     * at least not in it's current form.
+     * No access is provided to the allocator itself, for simplicity
+     * and to make clear this arena has limited usability.
      */
     template <typename Allocator>
-    class some_arena
+    class possessive_arena
     {
         Allocator allocator;
     public:
         template <typename Area>
-        some_arena(const Area& area) : allocator(area.start(), area.end())
+        possessive_arena(const Area& area) : allocator(area.start(), area.end())
         {
         }
 

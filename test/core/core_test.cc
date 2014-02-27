@@ -21,7 +21,7 @@ int main() {
 	int x;
 	core::stack_area<64*1024> sa;
 	int y;
-	core::some_arena<core::linear_allocator> arena(sa);
+	core::possessive_arena<core::linear_allocator> arena(sa);
 	int* a = CORE_NEW(arena, int, 3);
 	std::cout << &x << std::endl;
 	std::cout << sa.start() << std::endl;
