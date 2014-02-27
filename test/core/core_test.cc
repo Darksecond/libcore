@@ -16,6 +16,7 @@ void test_fnv1a_hash() {
 	test_compile_time_const<core::hash_fnv1a("test")> hash;
 }
 
+//TODO Make tests for memory stuff
 int main() {
 	core::heap_area area(64*1024); //64KiB
 	int x;
