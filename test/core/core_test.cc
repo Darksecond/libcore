@@ -5,6 +5,23 @@
 #include <core/memory.h>
 #include <core/memory/stack_area.h>
 
+class Test
+{
+	int t;
+public:
+	Test()
+	{
+		static int c;
+		t = c++;
+		std::cout << "Test: constructor " << t << std::endl;
+	}
+
+	~Test()
+	{
+		std::cout << "Test: destructor " << t << std::endl;
+	}
+};
+
 template <uint64_t NUM>
 struct test_compile_time_const {
 	static const uint64_t value = NUM;
@@ -18,16 +35,27 @@ void test_fnv1a_hash() {
 
 //TODO Make tests for memory stuff
 int main() {
+
 	core::heap_area area(64*1024); //64KiB
-	int x;
-	core::stack_area<64*1024> sa;
-	int y;
-	core::possessive_arena<core::linear_allocator> arena(sa);
+	core::possessive_arena<core::linear_allocator> arena(area);
+
+	int* b = CORE_NEW(arena, int);
+	*b = 4;
+	CORE_DELETE(arena, b);
+
 	int* a = CORE_NEW(arena, int, 3);
-	std::cout << &x << std::endl;
-	std::cout << sa.start() << std::endl;
-	std::cout << &y << std::endl;
+	*a = 28;
 	CORE_DELETE(arena, a);
+
+	Test* t = CORE_NEW(arena, Test);
+	CORE_DELETE(arena, t);
+
+	int* c = CORE_NEW_ARRAY(arena, int[3]);
+	CORE_DELETE_ARRAY(arena, c);
+
+	Test* u = CORE_NEW_ARRAY(arena, Test[3]);
+	CORE_DELETE_ARRAY(arena, u);
+
 	test_fnv1a_hash();
 	return 0;
 }
