@@ -56,6 +56,10 @@ int main() {
 	Test* u = CORE_NEW_ARRAY(arena, Test[3]);
 	CORE_DELETE_ARRAY(arena, u);
 
+	int* d = CORE_NEW_ALIGNED(arena, int, 128);
+	*d = 128;
+	CORE_DELETE(arena, d);
+
 	test_fnv1a_hash();
 	return 0;
 }
