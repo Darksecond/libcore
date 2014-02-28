@@ -6,6 +6,7 @@ TODO
 ** do _all_ I/O through async. I/O, with different priorities.
 ** support doing multiple I/O operations at the same time.
 * unbuffered flag for files
+* replace fstream with FILE* in fs_file.h
 
 * most compile-time stuff in types.h to somewhere else
 * compiler.h
