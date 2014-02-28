@@ -20,6 +20,7 @@ namespace core
         {
         }
 
+	//TODO Implement these as memcpy
         fixed_stack(const fixed_stack&) = delete;
         fixed_stack(fixed_stack&&) = delete;
 
