@@ -5,6 +5,7 @@ TODO
 ** use tasking library to do blocking I/O behind the scenes
 ** do _all_ I/O through async. I/O, with different priorities.
 ** support doing multiple I/O operations at the same time.
+* unbuffered flag for files
 
 * most compile-time stuff in types.h to somewhere else
 * compiler.h
