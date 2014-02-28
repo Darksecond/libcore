@@ -4,13 +4,12 @@
 
 #define CORE_SOURCEINFO core::source_info{__FILE__, __FUNCTION__, __LINE__}
 
-//TODO Make these work for non-argument things
-#define CORE_LOG(level, channel, format, ...) core::log::log(CORE_SOURCEINFO, level, channel, format, __VA_ARGS__)
-#define CORE_LDEBUG(channel, format, ...) core::log::log(CORE_SOURCEINFO, 4, channel, format, __VA_ARGS__)
-#define CORE_LINFO(channel, format, ...) core::log::log(CORE_SOURCEINFO, 3, channel, format, __VA_ARGS__)
-#define CORE_LWARNING(channel, format, ...) core::log::log(CORE_SOURCEINFO, 2, channel, format, __VA_ARGS__)
-#define CORE_LERROR(channel, format, ...) core::log::log(CORE_SOURCEINFO, 1, channel, format, __VA_ARGS__)
-#define CORE_LFATAL(channel, format, ...) core::log::log(CORE_SOURCEINFO, 0, channel, format, __VA_ARGS__)
+#define CORE_LOG(level, channel, format, ...) core::log::log(CORE_SOURCEINFO, level, channel, format, ##__VA_ARGS__)
+#define CORE_LDEBUG(channel, format, ...) core::log::log(CORE_SOURCEINFO, 4, channel, format, ##__VA_ARGS__)
+#define CORE_LINFO(channel, format, ...) core::log::log(CORE_SOURCEINFO, 3, channel, format, ##__VA_ARGS__)
+#define CORE_LWARNING(channel, format, ...) core::log::log(CORE_SOURCEINFO, 2, channel, format, ##__VA_ARGS__)
+#define CORE_LERROR(channel, format, ...) core::log::log(CORE_SOURCEINFO, 1, channel, format, ##__VA_ARGS__)
+#define CORE_LFATAL(channel, format, ...) core::log::log(CORE_SOURCEINFO, 0, channel, format, ##__VA_ARGS__)
 
 namespace core
 {

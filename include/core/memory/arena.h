@@ -23,7 +23,7 @@ namespace core
      * and to make clear this arena has limited usability.
      */
     template <typename Allocator>
-    class possessive_arena
+    class possessive_arena : public arena
     {
         Allocator allocator;
     public:

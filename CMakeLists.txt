@@ -39,6 +39,7 @@ add_library (core
 	include/core/containers/fixed_array.h
 	include/core/containers/freelist.h
 	include/core/containers/fixed_stack.h
+	include/core/containers/dynamic_stack.h
 	include/core/filesystem/archive.h
 	include/core/filesystem/file.h
 	include/core/filesystem/fs_archive.h

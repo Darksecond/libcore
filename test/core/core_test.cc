@@ -6,6 +6,10 @@
 #include <core/memory/stack_area.h>
 
 #include <core/containers/fixed_stack.h>
+#include <core/containers/dynamic_stack.h>
+#include <core/containers/dynamic_array.h>
+
+#include <core/logging/console_logger.h>
 
 class Test
 {
@@ -57,10 +61,13 @@ void test_fixed_stack()
     for(core::fixed_stack<int, 100>::iterator it = stack.begin(); it != stack.end(); ++it)
         ++count;
     assert(count == 2);
+    //test move version of push
 }
 
 //TODO Make tests for memory stuff
 int main() {
+    core::console_logger cl;
+    core::log::set_logger(&cl, 0);
 
 	core::heap_area area(64*1024); //64KiB
 	core::possessive_arena<core::linear_allocator> arena(area);
@@ -85,6 +92,11 @@ int main() {
 	int* d = CORE_NEW_ALIGNED(arena, int, 128);
 	*d = 128;
 	CORE_DELETE(arena, d);
+
+    core::dynamic_stack<int> stack(&arena, 100);
+
+    core::dynamic_array<int> arry(&arena, 10);
+    arry.add(std::move(1));
 
 	test_fnv1a_hash();
 	test_fixed_stack();

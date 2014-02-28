@@ -1,10 +1,10 @@
 #pragma once
 
 #include <core/memory/arena.h>
+#include <core/memory/new_delete.h>
 
 #include <cassert>
 #include <utility>
-#include <new>
 
 namespace core
 {
@@ -31,6 +31,7 @@ namespace core
             reserve(initial_capacity);
         }
         
+        //TODO Implement with memcpy
         dynamic_array(dynamic_array&) = delete;
         dynamic_array& operator=(dynamic_array&) = delete;
         
@@ -81,9 +82,7 @@ namespace core
         void clear()
         {
             for(size_t i = 0; i < size(); ++i)
-            {
-                _start[i].~T(); //TODO move to new_delete.h as destruct function
-            }
+                memory_internals::destruct(_start + i);
             
             _used_end = _start;
         }
@@ -119,7 +118,7 @@ namespace core
             assert(_start != nullptr); //cannot be free-ed
             assert(_end != _used_end); //cannot be full
             
-            new (_used_end) T(item); //TODO move to new_delete.h as construct function
+            memory_internals::construct<T>(_used_end, item);
             ++_used_end;
         }
         
@@ -127,8 +126,8 @@ namespace core
         {
             assert(_start != nullptr); //cannot be free-ed
             assert(_end != _used_end); //cannot be full
-            
-            new (_used_end) T(item); //TODO move to new_delete.h as construct function
+
+            memory_internals::construct<T>(_used_end, std::move(item));
             ++_used_end;
         }
         
@@ -144,8 +143,10 @@ namespace core
         
         void pop_back()
         {
+            assert(size() > 0);
+
             --_used_end;
-            _used_end->~T(); //TODO move to new_delete.h as destruct function
+            memory_internals::destruct(_used_end);
         }
         
         iterator begin()
@@ -181,16 +182,16 @@ namespace core
         {
             assert(_start + i < _used_end); //cannot delete outside of used range
             
-            _start[i].~T();
+            memory_internals::destruct(_start + i);
             
             --_used_end;
             const bool last = (_start +i == _used_end);
             
             if(!empty() && !last)
             {
-                new (_start + i) T(std::move(*_used_end));
+                memory_internals::construct<T>(_start + i, std::move(*_used_end));
                 
-                _used_end->~T();
+                memory_internals::destruct(_used_end);
             }
         }
         

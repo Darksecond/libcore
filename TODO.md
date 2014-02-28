@@ -39,7 +39,7 @@ TODO
 * pool allocator -> http://molecularmusings.wordpress.com/2012/09/17/memory-allocation-strategies-a-pool-allocator/
 * more allocators
 
-* {fixed,dynamic}_{queue,stack,hashmap}
+* {fixed,dynamic}_{queue,hashmap}
 * linked list
 
 * SOURCE_GROUP in CMakeLists.txt

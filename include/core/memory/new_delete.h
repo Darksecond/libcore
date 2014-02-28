@@ -2,6 +2,7 @@
 
 #include <core/types.h>
 #include <core/logging/log.h>
+#include <core/util/union_cast.h>
 
 #include <cassert>
 #include <type_traits>
@@ -19,25 +20,26 @@
 namespace core
 {
     //TODO CORE_NEW_ARRAY_ALIGNED
+    //TODO Move to core::memory namespace instead of memory_internals
     namespace memory_internals
     {
         typedef bool_to_type<false> NonPODType;
         typedef bool_to_type<true> PODType;
 
         template<typename T>
-        void destruct(T* object, NonPODType)
+        inline void destruct(T* object, NonPODType)
         {
                 object->~T();
         }
 
         template<typename T>
-        void destruct(T* object, PODType)
+        inline void destruct(T* object, PODType)
         {
             //Do nothing
         }
 
         template<typename T>
-        void destruct(T* object)
+        inline void destruct(T* object)
         {
             assert(object);
 
@@ -45,12 +47,48 @@ namespace core
         }
 
         template<typename T>
-        void destruct_array(T* objects, const size_t N)
+        inline void destruct_array(T* objects, const size_t N)
         {
             assert(objects);
 
             for(size_t i=N; i>0; --i)
                 destruct(objects + i - 1);
+        }
+
+        template<typename T>
+        inline T* construct(void* where)
+        {
+            assert(where);
+
+            return new (where) T;
+        }
+
+        template<typename T>
+        inline T* construct(void* where, const T& what)
+        {
+            assert(where);
+
+            return new (where) T(what);
+        }
+
+        template<typename T>
+        inline T* construct(void* where, T&& what)
+        {
+            assert(where);
+
+            return new (where) T(what);
+        }
+
+        template<typename T>
+        inline T* construct_array(void* where, const size_t N)
+        {
+            assert(where);
+
+            T* as_T = union_cast<T*>(where);
+
+            for(size_t i=0; i<N; ++i)
+                construct<T>(as_T + i);
+            return as_T;
         }
 
         template<class A, typename T>
@@ -64,33 +102,25 @@ namespace core
         }
 
         template<typename T, class A>
-        T* new_array_mem(A& arena, size_t count, const source_info& info, PODType)
+        T* new_array_mem(A& arena, const size_t count, const source_info& info, PODType)
         {
             return static_cast<T*>(arena.allocate(sizeof(T) * count, alignof(T), 0, info));
         }
 
         template<typename T, class A>
-        T* new_array_mem(A& arena, size_t count, const source_info& info, NonPODType)
+        T* new_array_mem(A& arena, const size_t count, const source_info& info, NonPODType)
         {
             union
             {
                 void* as_void;
                 size_t* as_size_t;
-                T* as_T;
             };
 
             as_void = arena.allocate( sizeof(T) * count + sizeof(size_t), alignof(T), sizeof(size_t), info );
 
             *as_size_t++ = count;
 
-            const T* const end = as_T + count;
-
-            while(as_T < end)
-            {
-                new (as_T++) T;
-            }
-
-            return (as_T - count);
+            return construct_array<T>(as_void, count);
         }
 
         template<typename T, class A>
