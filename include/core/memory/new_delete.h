@@ -13,7 +13,9 @@
 
 #define CORE_DELETE(arena, object) core::memory_internals::delete_mem(arena, object, CORE_SOURCEINFO)
 
-#define CORE_NEW_ARRAY(arena, type) core::memory_internals::new_array_mem<core::type_and_count<type>::Type>(arena, core::type_and_count<type>::Count, CORE_SOURCEINFO)
+#define CORE_NEW_ARRAY(arena, type) core::memory_internals::new_array_mem<core::type_and_count<type>::Type>(arena, alignof(core::type_and_count<type>::Type), core::type_and_count<type>::Count, CORE_SOURCEINFO)
+
+#define CORE_NEW_ARRAY_ALIGNED(arena, type, alignment) core::memory_internals::new_array_mem<core::type_and_count<type>::Type>(arena, alignment, core::type_and_count<type>::Count, CORE_SOURCEINFO)
 
 #define CORE_DELETE_ARRAY(arena, ptr) core::memory_internals::delete_array_mem(arena, ptr, CORE_SOURCEINFO);
 
@@ -102,13 +104,13 @@ namespace core
         }
 
         template<typename T, class A>
-        T* new_array_mem(A& arena, const size_t count, const source_info& info, PODType)
+        T* new_array_mem(A& arena, const size_t count, const size_t alignment, const source_info& info, PODType)
         {
-            return static_cast<T*>(arena.allocate(sizeof(T) * count, alignof(T), 0, info));
+            return static_cast<T*>(arena.allocate(sizeof(T) * count, alignment, 0, info));
         }
 
         template<typename T, class A>
-        T* new_array_mem(A& arena, const size_t count, const source_info& info, NonPODType)
+        T* new_array_mem(A& arena, const size_t count, const size_t alignment, const source_info& info, NonPODType)
         {
             union
             {
@@ -116,7 +118,7 @@ namespace core
                 size_t* as_size_t;
             };
 
-            as_void = arena.allocate( sizeof(T) * count + sizeof(size_t), alignof(T), sizeof(size_t), info );
+            as_void = arena.allocate( sizeof(T) * count + sizeof(size_t), alignment, sizeof(size_t), info );
 
             *as_size_t++ = count;
 
@@ -124,9 +126,9 @@ namespace core
         }
 
         template<typename T, class A>
-        T* new_array_mem(A& arena, size_t count, const source_info& info)
+        T* new_array_mem(A& arena, size_t count, const size_t alignment, const source_info& info)
         {
-            return new_array_mem<T>(arena, count, info, bool_to_type<std::is_pod<T>::value>());
+            return new_array_mem<T>(arena, count, alignment, info, bool_to_type<std::is_pod<T>::value>());
         }
 
         template<typename T, class A>
