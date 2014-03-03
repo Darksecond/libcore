@@ -45,4 +45,3 @@ TODO
 * SOURCE_GROUP in CMakeLists.txt
 * file logger
 * profiler
-* doc/coding_standard.md
