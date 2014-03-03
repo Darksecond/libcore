@@ -4,6 +4,8 @@
 #include <core/hashing/fnv1a.h>
 #include <core/memory.h>
 #include <core/memory/stack_area.h>
+#include <core/memory/simple_arena.h>
+#include <core/memory/stack_allocator.h>
 
 #include <core/containers/fixed_stack.h>
 #include <core/containers/dynamic_stack.h>
@@ -64,6 +66,16 @@ void test_fixed_stack()
     //test move version of push
 }
 
+void test_stack_alloc()
+{
+    core::heap_area area(64*1024); //64KiB
+    core::stack_allocator alloc(area.start(), area.end());
+    core::simple_arena<core::stack_allocator> arena(&alloc);
+
+    void* a = alloc.allocate(16, 4, 0);
+    alloc.free(a);
+}
+
 //TODO Make tests for memory stuff
 int main() {
     core::console_logger cl;
@@ -100,5 +112,6 @@ int main() {
 
 	test_fnv1a_hash();
 	test_fixed_stack();
+    test_stack_alloc();
 	return 0;
 }

@@ -56,6 +56,7 @@ add_library (core
 	include/core/memory/new_delete.h
 	include/core/memory/simple_arena.h
 	include/core/memory/system_allocator.h
+	include/core/memory/stack_allocator.h
 	include/core/string/fixed_string.h
 	include/core/string/string_hash.h
 	include/core/threading/condition_variable.h
@@ -71,6 +72,7 @@ add_library (core
 	src/core/memory/heap_area.cc
 	src/core/memory/linear_allocator.cc
 	src/core/memory/system_allocator.cc
+	src/core/memory/stack_allocator.cc
 	${PLATFORM_FILES}
 	)
 

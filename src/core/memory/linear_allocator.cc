@@ -10,12 +10,12 @@ void* core::linear_allocator::allocate(const size_t size, const size_t alignment
 {
     _current = (uint8_t*)align_up(_current + alignment_offset, alignment) - alignment_offset;
     void* ptr = _current;
-    _current += size;
-    if(_current >= _end)
+    if(_current + size >= _end)
     {
 	// Out of memory
         return nullptr;
     }
+    _current += size;
     
     return ptr;
 }
