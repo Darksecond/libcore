@@ -73,30 +73,6 @@ void test_stack_alloc()
 
     core::stack_allocator alloc(area.start(), area.end());
     core::simple_arena<core::stack_allocator> arena(&alloc);
-
-    void* a = alloc.allocate(13, 4, 0);
-    std::cout << "alloc a " << a << std::endl;
-
-    alloc.free(a);
-    std::cout << "free a" << std::endl;
-
-    void* b = alloc.allocate(13, 4, 0);
-    std::cout << "alloc b " << b << std::endl;
-
-    void* c = alloc.allocate(13, 4, 0);
-    std::cout << "alloc c " << c << std::endl;
-
-    alloc.free(c);
-    std::cout << "free c" << std::endl;
-
-    void* d = alloc.allocate(13, 4, 0);
-    std::cout << "alloc d " << d << std::endl;
-
-    alloc.free(d);
-    std::cout << "free d" << std::endl;
-
-    alloc.free(b);
-    std::cout << "free b" << std::endl;
 }
 
 //TODO Make tests for memory stuff

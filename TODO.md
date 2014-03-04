@@ -35,7 +35,6 @@ TODO
 * write a macro to re-size a size to include the CORE_NEW_ARRAY overhead
 * virtual_memory namespace with (reserve, release), (commit, decommit), (alloc and free).
 * system_allocator -> alignment
-* stack allocator -> http://molecularmusings.wordpress.com/2012/08/27/memory-allocation-strategies-a-stack-like-lifo-allocator/
 * pool allocator -> http://molecularmusings.wordpress.com/2012/09/17/memory-allocation-strategies-a-pool-allocator/
 * more allocators
 
