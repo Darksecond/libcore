@@ -169,6 +169,9 @@ namespace core
             return _used_end;
         }
         
+	/**
+	 * \returns true if the array is empty, false if not.
+	 */
         bool empty() const
         {
             return _start == _used_end;
@@ -176,7 +179,7 @@ namespace core
         
         /**
          * Erases element i by moving the last element into it's place.
-         * This will _not_ keep the array order!
+	 * \warning This will _not_ keep the array order!
          */
         inline void erase(size_t i)
         {
@@ -195,16 +198,28 @@ namespace core
             }
         }
         
+	/**
+	 * Erases element pointed to by \p it by moving the last element into it's place.
+	 * \warning This will _not_ keep the array order!
+	 */
         void erase(iterator it)
         {
             erase(it - _start);
         }
         
+	/**
+	 * Erases element pointed to by \p it by moving the last element into it's place.
+	 * \warning This will _not_ keep the array order!
+	 */
         void erase(const_iterator it)
         {
             erase(it - _start);
         }
         
+	/**
+	 * This will erase the first element that matches \p element by moving the last element into it's place.
+	 * \warning This will _not_ keep the array order!
+	 */
         void erase(const T& element)
         {
             for(size_t i = 0; i < size(); ++i)
