@@ -8,6 +8,10 @@
 
 namespace core
 {
+    /**
+     * Dynamic array container, like std::vector.
+     * This will use an allocator to allocate memory and will not grow dynamically.
+     */
     template<typename T>
     class dynamic_array
     {
