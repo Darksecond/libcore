@@ -60,6 +60,9 @@ namespace core
             free();
         }
         
+	/**
+	 * Allocate memory to store elements in. This will allocate memory for \p new_capacity elements.
+	 */
         void reserve(size_t new_capacity)
         {
             assert(_start == nullptr); //dynamic_array has not been free-ed yet.
@@ -69,16 +72,26 @@ namespace core
             _used_end = _start;
         }
         
+	/**
+	 * \returns the current amount of elements in this array.
+	 */
         size_t size()
         {
             return _used_end - _start;
         }
         
+	/**
+	 * The maximum amount of elements this array can contain.
+	 */
         size_t capacity()
         {
             return _end - _start;
         }
         
+	/**
+	 * Clear all elements from the array.
+	 * This will properly call the destructor on every element if required.
+	 */
         void clear()
         {
             for(size_t i = 0; i < size(); ++i)
@@ -87,6 +100,9 @@ namespace core
             _used_end = _start;
         }
         
+	/**
+	 * Free the memory used by the array.
+	 */
         void free()
         {
             clear();
@@ -99,6 +115,10 @@ namespace core
             _used_end = nullptr;
         }
         
+	/**
+	 * Access elements of array.
+	 * \param i element index. must be valid and in range.
+	 */
         T& operator[](size_t i)
         {
             assert(_start + i < _used_end); //must be in range
@@ -106,6 +126,10 @@ namespace core
             return _start[i];
         }
         
+	/**
+	 * Access elements of array.
+	 * \param i element index. must be valid and in range.
+	 */
         const T& operator[](size_t i) const
         {
             assert(_start + i < _used_end); //must be in range
@@ -113,6 +137,10 @@ namespace core
             return _start[i];
         }
         
+	/**
+	 * Add element \p item to the end of the array by copying it.
+	 * and increase size by one.
+	 */
         void add(const T& item)
         {
             assert(_start != nullptr); //cannot be free-ed
@@ -122,6 +150,10 @@ namespace core
             ++_used_end;
         }
         
+	/**
+	 * Add element \p item to the end of the array by moving it.
+	 * and increase size by one.
+	 */
         void add(T&& item)
         {
             assert(_start != nullptr); //cannot be free-ed
@@ -131,16 +163,25 @@ namespace core
             ++_used_end;
         }
         
+	/**
+	 * Get direct access to the underlying array
+	 */
         T* data()
         {
             return _start;
         }
         
+	/**
+	 * Get direct access to the underlying array
+	 */
         const T* data() const
         {
             return _start;
         }
         
+	/**
+	 * Remove the last element from the array and decrease size()
+	 */
         void pop_back()
         {
             assert(size() > 0);
