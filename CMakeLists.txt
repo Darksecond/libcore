@@ -36,6 +36,7 @@ add_library (core
 	include/core/platform.h
 	include/core/types.h
 	include/core/util/union_cast.h
+	include/core/util/event.h
 	include/core/containers/dynamic_array.h
 	include/core/containers/fixed_array.h
 	include/core/containers/freelist.h
