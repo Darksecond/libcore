@@ -30,7 +30,7 @@ if (APPLE)
 		)
 endif ()
 
-add_library (core 
+add_library (core
 	include/core/hashing/fnv1a.h
 	include/core/memory.h
 	include/core/platform.h
@@ -64,6 +64,7 @@ add_library (core
 	include/core/threading/thread_local_storage.h
 	include/core/threading/thread.h
 	include/core/time/hf_timer.h
+	include/core/core.h
 	src/core/filesystem/fs_archive.cc
 	src/core/filesystem/fs_file.cc
 	src/core/filesystem/root.cc
@@ -79,3 +80,13 @@ add_library (core
 add_executable (core_test test/core/core_test.cc)
 target_link_libraries (core_test core)
 add_test (NAME core_test COMMAND core_test)
+
+install (TARGETS core
+	ARCHIVE DESTINATION lib
+	LIBRARY DESTINATION lib
+	)
+
+install (DIRECTORY include/
+	DESTINATION include
+	FILES_MATCHING PATTERN "*.h"
+	)
