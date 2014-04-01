@@ -4,8 +4,8 @@ namespace core
 {
     namespace fs_modes
     {
-        constexpr int in = 1;
-        constexpr int out = 2;
-        constexpr int append = 4;
+        static const int in = 1;
+        static const int out = 2;
+        static const int append = 4;
     };
 };
