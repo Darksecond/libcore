@@ -12,6 +12,7 @@
 #include <core/containers/dynamic_array.h>
 
 #include <core/logging/console_logger.h>
+#include <core/compiler.h>
 
 class Test
 {
@@ -38,7 +39,8 @@ struct test_compile_time_const {
 void test_fnv1a_hash() {
 	assert(core::hash_fnv1a("test") == 18007334074686647077ULL);
 	//test for real compile time hash
-	test_compile_time_const<core::hash_fnv1a("test")> hash;
+	//test_compile_time_const<core::hash_fnv1a("test")> hash;
+	//TODO disabled for now due to lack of constexpr support on some platforms
 }
 
 void test_fixed_stack()

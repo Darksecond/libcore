@@ -1,6 +1,7 @@
 #pragma once
 
 #include <core/types.h>
+#include <core/compiler.h>
 #include <core/logging/log.h>
 #include <core/util/union_cast.h>
 
@@ -8,12 +9,12 @@
 #include <type_traits>
 #include <new>
 
-#define CORE_NEW(arena, type, ...) (new ((arena).allocate(sizeof(type), alignof(type), 0, CORE_SOURCEINFO)) type(__VA_ARGS__))
+#define CORE_NEW(arena, type, ...) (new ((arena).allocate(sizeof(type), CORE_ALIGNOF(type), 0, CORE_SOURCEINFO)) type(__VA_ARGS__))
 #define CORE_NEW_ALIGNED(arena, type, alignment, ...) (new ((arena).allocate(sizeof(type), alignment, 0, CORE_SOURCEINFO)) type(__VA_ARGS__))
 
 #define CORE_DELETE(arena, object) core::memory_internals::delete_mem(arena, object, CORE_SOURCEINFO)
 
-#define CORE_NEW_ARRAY(arena, type) core::memory_internals::new_array_mem<core::type_and_count<type>::Type>(arena, alignof(core::type_and_count<type>::Type), core::type_and_count<type>::Count, CORE_SOURCEINFO)
+#define CORE_NEW_ARRAY(arena, type) core::memory_internals::new_array_mem<core::type_and_count<type>::Type>(arena, CORE_ALIGNOF(core::type_and_count<type>::Type), core::type_and_count<type>::Count, CORE_SOURCEINFO)
 
 #define CORE_NEW_ARRAY_ALIGNED(arena, type, alignment) core::memory_internals::new_array_mem<core::type_and_count<type>::Type>(arena, alignment, core::type_and_count<type>::Count, CORE_SOURCEINFO)
 

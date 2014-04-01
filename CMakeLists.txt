@@ -8,7 +8,9 @@ set (core_VERSION_MINOR 1)
 include_directories (include)
 
 #TODO Make this dependent on the compiler used (MSVC vs clang)
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall")
+if (UNIX)
+	set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall")
+endif ()
 if (APPLE)
 	set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
 endif ()
@@ -66,6 +68,7 @@ add_library (core
 	include/core/threading/thread.h
 	include/core/time/hf_timer.h
 	include/core/core.h
+	include/core/compiler.h
 	src/core/filesystem/fs_archive.cc
 	src/core/filesystem/fs_file.cc
 	src/core/filesystem/root.cc

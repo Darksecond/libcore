@@ -1,5 +1,6 @@
 #pragma once
 
+#include <core/compiler.h>
 #include <core/memory/arena.h>
 #include <core/memory/new_delete.h>
 
@@ -10,6 +11,10 @@ namespace core
     template <typename T>
     class dynamic_stack
     {
+        //TODO Implement these
+        CORE_NO_COPY(dynamic_stack);
+        CORE_NO_MOVE(dynamic_stack);
+
         arena* _arena;
         T* _start; //Start of array
         T* _end; //One after last element of array
@@ -25,13 +30,6 @@ namespace core
             reserve(capacity);
         }
 
-        //TODO Implement these
-        dynamic_stack(const dynamic_stack&) = delete;
-        dynamic_stack& operator=(const dynamic_stack&) = delete;
-
-        dynamic_stack(dynamic_stack&&) = delete;
-        dynamic_stack& operator=(dynamic_stack&&) = delete;
-
         ~dynamic_stack()
         {
             free();
@@ -41,7 +39,7 @@ namespace core
         {
             assert(_start == nullptr);
 
-            _start = static_cast<T*>(_arena->allocate(sizeof(T)*capacity, alignof(T), 0, CORE_SOURCEINFO));
+            _start = static_cast<T*>(_arena->allocate(sizeof(T)*capacity, CORE_ALIGNOF(T), 0, CORE_SOURCEINFO));
             _current = _start;
             _end = _start + capacity;
         }

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <core/compiler.h>
 #include <pthread.h>
 
 namespace core
@@ -10,6 +11,9 @@ namespace core
      */
     class thread
     {
+        CORE_NO_MOVE(thread);
+        CORE_NO_COPY(thread);
+
         enum class state_t
         {
             READY,
@@ -29,12 +33,6 @@ namespace core
          * This just calls destroy().
          */
         ~thread();
-        
-        thread(const thread&) = delete;
-        thread(thread&&) = delete;
-        
-        thread& operator=(const thread&) = delete;
-        thread& operator=(thread&&) = delete;
         
         /**
          * Create and start a new OS thread, with name and function to execute.

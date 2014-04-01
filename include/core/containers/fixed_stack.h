@@ -1,5 +1,7 @@
 #pragma once
 
+#include <core/compiler.h>
+
 #include <cassert>
 
 namespace core
@@ -10,6 +12,9 @@ namespace core
     template <typename T, size_t N>
     class fixed_stack
     {
+        //TODO Implement these as memcpy
+        CORE_NO_COPY(fixed_stack);
+        CORE_NO_MOVE(fixed_stack);
         T _array[N];
         T* _current;
     public:
@@ -19,13 +24,6 @@ namespace core
         inline fixed_stack() : _current(_array)
         {
         }
-
-	//TODO Implement these as memcpy
-        fixed_stack(const fixed_stack&) = delete;
-        fixed_stack(fixed_stack&&) = delete;
-
-        fixed_stack& operator=(const fixed_stack&) = delete;
-        fixed_stack& operator=(fixed_stack&&) = delete;
 
         inline size_t size() const
         {

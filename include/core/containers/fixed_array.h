@@ -1,10 +1,15 @@
 #pragma once
 
+#include <core/compiler.h>
+
 namespace core
 {
     template <typename T, size_t N>
     class fixed_array
     {
+        CORE_NO_MOVE(fixed_array);
+        CORE_NO_COPY(fixed_array);
+
         T _array[N];
     public:
         typedef T* iterator;
@@ -21,12 +26,6 @@ namespace core
             for(size_t i = 0; i < N; ++i)
                 _array[i] = initial_value;
         }
-        
-        fixed_array(const fixed_array&) = delete;
-        fixed_array(fixed_array&&) = delete;
-        
-        fixed_array& operator=(const fixed_array&) = delete;
-        fixed_array& operator=(fixed_array&&) = delete;
         
         inline T& operator[](size_t i)
         {

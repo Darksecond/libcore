@@ -1,19 +1,19 @@
 #pragma once
 
+#include <core/compiler.h>
 #include <core/types.h>
 
 namespace core
 {
     class heap_area
     {
+        CORE_NO_COPY(heap_area);
+
         void* _start;
         size_t _size;
     public:
         explicit heap_area(size_t s);
         ~heap_area();
-
-        heap_area(heap_area& other) = delete;
-        heap_area& operator=(heap_area& other) = delete;
 
         heap_area(heap_area&& other);
         heap_area& operator=(heap_area&& other);

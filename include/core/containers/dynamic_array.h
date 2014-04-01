@@ -1,5 +1,6 @@
 #pragma once
 
+#include <core/compiler.h>
 #include <core/memory/arena.h>
 #include <core/memory/new_delete.h>
 
@@ -15,6 +16,9 @@ namespace core
     template<typename T>
     class dynamic_array
     {
+        //TODO Implement with memcpy
+        CORE_NO_COPY(dynamic_array);
+
         arena* _arena;
         T* _start;
         T* _end; //one after end of allocated memory
@@ -35,9 +39,6 @@ namespace core
             reserve(initial_capacity);
         }
         
-        //TODO Implement with memcpy
-        dynamic_array(dynamic_array&) = delete;
-        dynamic_array& operator=(dynamic_array&) = delete;
         
         dynamic_array(dynamic_array&& other) : _start(other._start), _end(other._end), _used_end(other._used_end)
         {
@@ -71,7 +72,7 @@ namespace core
         {
             assert(_start == nullptr); //dynamic_array has not been free-ed yet.
             
-            _start = static_cast<T*>(_arena->allocate(sizeof(T)*new_capacity, alignof(T), 0, CORE_SOURCEINFO));
+            _start = static_cast<T*>(_arena->allocate(sizeof(T)*new_capacity, CORE_ALIGNOF(T), 0, CORE_SOURCEINFO));
             _end = _start + new_capacity;
             _used_end = _start;
         }

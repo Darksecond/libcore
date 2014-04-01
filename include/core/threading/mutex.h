@@ -1,5 +1,7 @@
 #pragma once
 
+#include <core/compiler.h>
+
 #include <pthread.h>
 
 namespace core
@@ -38,6 +40,10 @@ namespace core
     
     class scoped_lock
     {
+        CORE_NO_COPY(scoped_lock);
+        CORE_NO_MOVE(scoped_lock);
+
+        mutex _mutex;
     public:
         inline scoped_lock()
         {
@@ -48,13 +54,5 @@ namespace core
         {
             _mutex.unlock();
         }
-        
-        scoped_lock(const scoped_lock&) = delete;
-        scoped_lock(scoped_lock&&) = delete;
-        
-        scoped_lock& operator=(const scoped_lock&) = delete;
-        scoped_lock& operator=(scoped_lock&&) = delete;
-    private:
-        mutex _mutex;
     };
 };
