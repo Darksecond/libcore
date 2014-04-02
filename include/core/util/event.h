@@ -40,6 +40,10 @@ namespace core
                     return (Function)(args...);
                 }
         public:
+            event() : _sink(nullptr)
+            {
+            }
+
             class sink
             {
                 core::dynamic_array<stub> stubs;
