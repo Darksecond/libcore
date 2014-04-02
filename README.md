@@ -17,6 +17,12 @@ Building
 4. `make`
 5. `make test`
 
+Installing
+==========
+
+1. Build the project using the steps described above.
+2. `make install`
+
 Contributing
 ------------
 
