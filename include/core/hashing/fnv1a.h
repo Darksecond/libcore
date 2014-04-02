@@ -5,7 +5,7 @@
 
 namespace core
 {
-#if CORE_PLATFORM_WIN
+#ifdef CORE_PLATFORM_WIN
     //code from: http://seanmiddleditch.com/journal/2011/05/compile-time-string-hashing-in-c0x/
     // FNV-1a constants
     static const uint64_t fnv1a_basis = 14695981039346656037ULL;
