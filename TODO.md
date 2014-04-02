@@ -44,3 +44,5 @@ TODO
 * SOURCE_GROUP in CMakeLists.txt
 * file logger
 * profiler
+
+* make fnv1a constexpr dependent on platform
