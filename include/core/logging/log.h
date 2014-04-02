@@ -2,7 +2,7 @@
 
 #include <cstdarg>
 
-#define CORE_SOURCEINFO core::source_info{__FILE__, __FUNCTION__, __LINE__}
+#define CORE_SOURCEINFO core::source_info(__FILE__, __FUNCTION__, __LINE__)
 
 #define CORE_LOG(level, channel, format, ...) core::log::log(CORE_SOURCEINFO, level, channel, format, ##__VA_ARGS__)
 #define CORE_LDEBUG(channel, format, ...) core::log::log(CORE_SOURCEINFO, 4, channel, format, ##__VA_ARGS__)
@@ -15,6 +15,10 @@ namespace core
 {
     struct source_info
     {
+        inline source_info(const char* const file_, const char* const function_, const int line_) : file(file_), function(function_), line(line_)
+        {
+        }
+
         const char* const file;
         const char* const function;
         const int line;
